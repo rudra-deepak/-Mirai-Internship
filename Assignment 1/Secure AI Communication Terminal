@@ -1,0 +1,115 @@
+import streamlit as st
+import time
+
+# ----------------------------
+# Page Configuration
+# ----------------------------
+st.set_page_config(
+    page_title="🤖 Identity Echo AI",
+    page_icon="🤖",
+    layout="centered"
+)
+
+
+# ----------------------------
+# CUSTOM BACKGROUND (PASTE HERE)
+# ----------------------------
+st.markdown("""
+<style>
+
+.stApp{
+    background: linear-gradient(135deg,#0f172a,#1e1b4b,#312e81);
+    color:white;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# ----------------------------
+# Title & Description
+# ----------------------------
+st.title("🤖 Identity Echo AI")
+st.subheader("AI Communication Terminal")
+st.write("Send a secure transmission to the Echo Network.")
+
+st.divider()
+
+# ----------------------------
+# User Inputs
+# ----------------------------
+user_name = st.text_input("👤 Your Name")
+user_message = st.text_input("💬 Your Message")
+
+st.divider()
+
+# ----------------------------
+# Button
+# ----------------------------
+if st.button("🚀 Transmit", use_container_width=True):
+
+    # Name Empty
+    if user_name.strip() == "":
+        st.error("Please provide your name.")
+
+    # Message Empty
+    elif user_message.strip() == "":
+        st.warning("Please type a message to transmit.")
+
+    else:
+        # Loading Animation
+        with st.spinner("🔒 Encrypting your transmission..."):
+            time.sleep(2)
+
+        # ----------------------------
+        # Required Assignment Output
+        # ----------------------------
+        st.success(
+            f"Transmission successful! Greetings, {user_name}. "
+            f"We received your message: {user_message}"
+        )
+
+        st.divider()
+
+        # ----------------------------
+        # Premium AI Output
+        # ----------------------------
+        st.markdown("## 🚀 Transmission Successful!")
+
+        st.write(f"### Hello {user_name} 👋")
+
+        st.write("Your encrypted message has been delivered to the Echo Network.")
+
+        st.markdown("### 📨 Message Received")
+
+        st.code(user_message)
+
+        st.divider()
+
+        # ----------------------------
+        # Diagnostics
+        # ----------------------------
+        characters = len(user_message)
+        tokens = characters / 4
+
+        if characters < 20:
+            strength = "🟡 Weak"
+        elif characters < 60:
+            strength = "🟢 Stable"
+        else:
+            strength = "🔵 Strong"
+
+        st.markdown("## 📊 System Diagnostics")
+
+        st.info(
+            f"""
+**Characters :** {characters}
+
+**Estimated Tokens :** {tokens:.2f}
+
+**Signal Strength :** {strength}
+
+**System Status :** ✅ Delivered Successfully
+"""
+        )
+
+        st.balloons()
